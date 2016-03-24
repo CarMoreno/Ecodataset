@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Viewing ${name}</title>
+    </head>
+    <body>
+        <h1>${name}</h1>
+        <h3>ECOLOD</h3>
+        <table>
+        % for row in resultado:
+            <tr>
+                <td style="font-weight:bold">${row[3]}</td>
+                <td>${row[4]}</td>
+                <td>${row[5]}</td>
+            </tr>
+        % endfor
+    </body>
+</html>
