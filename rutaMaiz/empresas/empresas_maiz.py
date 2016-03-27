@@ -38,7 +38,7 @@ ge.add( (facebook['ViveroElRosaltulua'], S.streetAddress, Literal("Calle 27 No. 
 ge.add( (facebook['ViveroElRosaltulua'], S.telephone, Literal("225 71 51, 231 34 40, 231 97 19, 316 554 2035")))
 ge.add( (facebook['ViveroElRosaltulua'], FOAF.homepage, URIRef("http://www.viveroelrosal.com/")))
 ge.add( (facebook['ViveroElRosaltulua'], FOAF.depiction, URIRef("http://i.imgur.com/OicbmG7.jpg")))
-ge.add( (facebook['ViveroElRosaltulua'], FOAF.depiction, URIRef(" http://i.imgur.com/SHdLfut.jpg")))
+ge.add( (facebook['ViveroElRosaltulua'], FOAF.depiction, URIRef("http://i.imgur.com/SHdLfut.jpg")))
 ge.add( (facebook['ViveroElRosaltulua'], S.faxNumber, Literal("57-2-2242131")))
 ge.add( (facebook['ViveroElRosaltulua'], RDF.type, GR.BusinessEntity))
 

@@ -1,6 +1,6 @@
 from rdflib import Namespace, URIRef, Literal, Graph
 from rdflib.namespace import RDF, RDFS, FOAF
-from ontologias import ACCO, ORG, GR
+from ontologias import ACCO, ORG, GR, S
 import blank_nodes
 
 #from centro_vc import g
@@ -57,7 +57,7 @@ gm.add( (facebook['hotelcafeplaza'], GR.name, Literal("Hotel Cafe Plaza - C.C. D
 gm.add( (facebook['hotelcafeplaza'], S.telephone, Literal("2246486, 2246488, 3113546020")) )
 gm.add( (facebook['hotelcafeplaza'], S.streetAddress, Literal("Calle 27 # 26-60 ofi 401")) )
 gm.add( (facebook['hotelcafeplaza'], S.email, Literal("centrocomercialdelparque@hotmail.com")) )
-gm.add( (facebook['hotelcafeplaza'], FOAF.homepage, homepage_cafeplaza))
+gm.add( (facebook['hotelcafeplaza'], S.sameAs, homepage_cafeplaza))
 gm.add( (facebook['hotelcafeplaza'], ACCO.feature, ACCO.AccommodationFeature) )
 gm.add( (facebook['hotelcafeplaza'], RDF.type, ACCO.Hotel) )
 gm.add( (ACCO.AccommodationFeature, ACCO.availabilityTimes, Literal("24 Horas")) )
@@ -648,7 +648,7 @@ gm.add( (facebook['Hotel-Juan-Maria-1458858754370044/?fref=ts'], S.telephone, Li
 gm.add( (facebook['Hotel-Juan-Maria-1458858754370044/?fref=ts'], S.streetAddress, Literal("Carrera 28 No. 27 - 10")) )
 gm.add( (facebook['Hotel-Juan-Maria-1458858754370044/?fref=ts'], S.email, Literal("administracion@hoteljuanmaria.com")) )
 gm.add( (facebook['Hotel-Juan-Maria-1458858754370044/?fref=ts'], ACCO.feature, ACCO.AccommodationFeature) )
-gm.add( (facebook['Hotel-Juan-Maria-1458858754370044/?fref=ts'], FOAF.homepage, homepage_jm))
+gm.add( (facebook['Hotel-Juan-Maria-1458858754370044/?fref=ts'], S.sameAs, homepage_jm))
 gm.add( (facebook['Hotel-Juan-Maria-1458858754370044/?fref=ts'], RDF.type, ACCO.Hotel))
 gm.add( (ACCO.AccommodationFeature, ACCO.availabilityTimes, Literal("24 Horas")) )
 gm.add( (blank_nodes.cuarto_jm, ACCO.partOf, facebook['Hotel-Juan-Maria-1458858754370044/?fref=ts']) )
@@ -1071,7 +1071,7 @@ gm.add( (facebook['principehotel'], S.streetAddress, Literal("Carrera 24 No. 26 
 gm.add( (facebook['principehotel'], S.email, Literal("info@principeh.com")) )
 gm.add( (facebook['principehotel'], ACCO.feature, ACCO.AccommodationFeature) )
 gm.add( (facebook['principehotel'], RDF.type, ACCO.Hotel))
-gm.add( (facebook['principehotel'], FOAF.homepage, homepage_principe) )
+gm.add( (facebook['principehotel'], S.sameAs, homepage_principe) )
 gm.add( (ACCO.AccommodationFeature, ACCO.availabilityTimes, Literal("24 Horas")) )
 #Habitacion sencilla
 gm.add( (productos_principe['habitacion-sencilla'], ACCO.partOf, facebook['principehotel']) )
@@ -1271,7 +1271,7 @@ gm.add( (facebook['pages/Hotel-San-Gil/136459539876626?fref=ts'], S.streetAddres
 gm.add( (facebook['pages/Hotel-San-Gil/136459539876626?fref=ts'], S.email, Literal("astridserna@hotmail.com")) )
 gm.add( (facebook['pages/Hotel-San-Gil/136459539876626?fref=ts'], ACCO.feature, ACCO.AccommodationFeature) )
 gm.add( (facebook['pages/Hotel-San-Gil/136459539876626?fref=ts'], RDF.type, ACCO.Hotel))
-gm.add( (facebook['pages/Hotel-San-Gil/136459539876626?fref=ts'], FOAF.homepage, homepage_sangil))
+gm.add( (facebook['pages/Hotel-San-Gil/136459539876626?fref=ts'], S.sameAs, homepage_sangil))
 gm.add( (ACCO.AccommodationFeature, ACCO.availabilityTimes, Literal("24 Horas")) )
 #Habitacion sencilla
 gm.add( (twitter['Ecodataset/status/702963610675445761'], ACCO.partOf, facebook['pages/Hotel-San-Gil/136459539876626?fref=ts']) )
