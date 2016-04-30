@@ -15,5 +15,4 @@ GEOES = Namespace('http://geo.linkeddata.es/ontology/') #
 
 #Otros
 GR = Namespace('http://purl.org/goodrelations/v1#')#ontologia del e-comerce
-S = Namespace('http://schema.org/')
-
+VCARD = Namespace('http://www.w3.org/2006/vcard/ns#')
