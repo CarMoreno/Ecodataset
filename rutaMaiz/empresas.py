@@ -13,6 +13,11 @@ dbr = Namespace('http://dbpedia.org/resource/')
 
 # Esquema del grafo para empresas de la ruta del maíz.
 def empresas(uri, nombre, tel, imagen, blank_node, ciudad, descripcion, direcc, email, webpage):
+	if webpage == "No disponible":
+		ge.add( (URIRef(uri), FOAF.homepage, Literal('No disponible')) )
+	else:
+		ge.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)) )
+			
 	ge.add( (URIRef(uri), RDF.type, GR.Location) )
 	ge.add( (URIRef(uri), GR.name, Literal(nombre)) )
 	ge.add( (URIRef(uri), GR.description, Literal(descripcion)))
@@ -23,7 +28,7 @@ def empresas(uri, nombre, tel, imagen, blank_node, ciudad, descripcion, direcc, 
 	ge.add( (BNode(blank_node), VCARD['locality'], Literal(ciudad)) )
 	ge.add( (URIRef(uri), VCARD['street-address'], Literal(direcc)))
 	ge.add( (URIRef(uri), VCARD.email, Literal(email)) ) 
-	ge.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)) )
+	
 
 empresas(
 	facebook['AGROCORVALLE'],
@@ -130,7 +135,7 @@ empresas(
 	'bn_centroaguas',
 	'Tuluá',
 	"""Purificación y distribucion de agua, para uso domestico y comercial""",
-	'Carrera 26  No. 26 - 15',
+	'Carrera 26  No. 26 - 15',
 	'info@centroaguas.com',
 	'http://www.centroaguas.com/'
 )
@@ -175,7 +180,7 @@ empresas(
 	facebook['Industria-de-Harinas-Tulua-limitada-133301366750011/'],
 	'Industria de Harinas Tuluá Limitada',
 	'(57) 2245815, (57) 2251477',
-	'No disponible',
+	'http://i.imgur.com/bszGL3B.png',
 	'bn_harinas',
 	'Tuluá',
 	"""Industria dedicada a la elaboración de harina de trigo fortificada
@@ -189,7 +194,7 @@ empresas(
 	dbr['Banco_Popular_(Colombia)'],
 	'Banco Popular agencia Tuluá',
 	'2243997',
-	'No disponible',
+	'http://i.imgur.com/bszGL3B.png',
 	'bn_popular',
 	'Tuluá',
 	"""Sede del Banco Poupular de la ciudad de Tuluá""",
@@ -205,7 +210,7 @@ empresas(
 	'bn_bogota',
 	'Tuluá',
 	"""Sede del Banco de Bogotá de la ciudad de Tuluá""",
-	'Carrera 26  No. 27 -32',
+	'Carrera 26  No. 27 -32',
 	'jds612@bancodebogota.com',
 	'http://www.bancodebogota.com/'
 )
