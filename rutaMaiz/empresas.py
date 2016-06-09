@@ -11,6 +11,7 @@ facebook = Namespace('https://www.facebook.com/')
 twitter = Namespace('https://www.twitter.com/')
 dbr = Namespace('http://dbpedia.org/resource/')
 
+# Esquema del grafo para empresas de la ruta del maíz.
 def empresas(uri, nombre, tel, imagen, blank_node, ciudad, descripcion, direcc, email, webpage):
 	ge.add( (URIRef(uri), RDF.type, GR.Location) )
 	ge.add( (URIRef(uri), GR.name, Literal(nombre)) )
@@ -20,13 +21,9 @@ def empresas(uri, nombre, tel, imagen, blank_node, ciudad, descripcion, direcc, 
 	ge.add( (BNode(blank_node), RDF.type, VCARD.Address) )
 	ge.add( (BNode(blank_node), VCARD['country-name'], Literal('Colombia')) )
 	ge.add( (BNode(blank_node), VCARD['locality'], Literal(ciudad)) )
-	
-	if direcc:
-		ge.add( (URIRef(uri), VCARD['street-address'], Literal(direcc)))
-	if email:
-		ge.add( (URIRef(uri), VCARD.email, Literal(email)) ) 
-	if webpage:
-		ge.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)) )
+	ge.add( (URIRef(uri), VCARD['street-address'], Literal(direcc)))
+	ge.add( (URIRef(uri), VCARD.email, Literal(email)) ) 
+	ge.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)) )
 
 empresas(
 	facebook['AGROCORVALLE'],
@@ -38,7 +35,7 @@ empresas(
 	"""Dedicada al cultivo y transformación de 
 	frutos de plantas oleaginosas principalmente la SACHA INCHI
 	con cadenas productivas 100% organicas""",
-	None,
+	'No disponible',
 	'sicorazondelvalle@gmail.com',
 	'https://www.agrocorvalle.com'
 )
@@ -52,8 +49,8 @@ empresas(
 	'Via Riofrio Km. 7 Palomestizo',
 	"""Empresa agroindustrial dedicada al cultivo de caña
 	y su transformación en azúcares, mieles, energía limpia y otros derivados""",
-	None,
-	None,
+	'No disponible',
+	'No disponible',
 	'http://www.ingeniosancarlos.com.co/' 
 )
 
@@ -66,7 +63,7 @@ empresas(
 	'Via Tulua - Riofrio',
 	'Empresa dedicada a la producción, comercialización y distribución de plantas ornamentales',
 	'Calle 27 No. 3 Oeste 52',
-	None,
+	'No disponible',
 	'http://www.viveroelrosal.com/'
 )
 
@@ -80,7 +77,7 @@ empresas(
 	"""Centro comercial del Corazon de Valle del Cauca donde encuentras plazoleta de comidas,
 	bares, tiendas, cine, eventos y mas""",
 	'Carrera 19 No. 28 - 76',
-	None,
+	'No disponible',
 	'http://www.laherradura.com.co/'
 )
 
@@ -94,7 +91,7 @@ empresas(
 	"""Centro empresarial, comercial y de negocios, epicentro de una permanente actividad social
 	y el lugar de encuentro favorito de las familias centro vallecaucanas""",
 	'Carrera. 40 No. 37-51',
-	None,
+	'No disponible',
 	'http://centrocomercialtulua.com/'
 )
 
@@ -121,7 +118,7 @@ empresas(
 	'Tuluá',
 	"""Moderna y tecnificada planta de producción de levadura""",
 	'Carrera 27 A No. 40-470',
-	None,
+	'No disponible',
 	'http://www.levapan.com/'
 )
 
@@ -160,7 +157,7 @@ empresas(
 	"""Transporte metropolitano colectivo regular de pasajeros""",
 	'Cr. 8 No. 26 B - 01',
 	'transtobartulua@gmail.com',
-	None
+	'No disponible'
 )
 empresas(
 	facebook['pages/Terminal-de-transportes-Tulu%C3%A1/413459778666424'],
@@ -178,21 +175,21 @@ empresas(
 	facebook['Industria-de-Harinas-Tulua-limitada-133301366750011/'],
 	'Industria de Harinas Tuluá Limitada',
 	'(57) 2245815, (57) 2251477',
-	None,
+	'No disponible',
 	'bn_harinas',
 	'Tuluá',
 	"""Industria dedicada a la elaboración de harina de trigo fortificada
 	y sus derivados como la sémola, semolatto, salvado, mogolla, harina de
 	tercera y harina integral""",
 	'Carrera 28 No 32-54',
-	None,
+	'No disponible',
 	'http://harinastulua.com/'
 )
 empresas(
 	dbr['Banco_Popular_(Colombia)'],
 	'Banco Popular agencia Tuluá',
 	'2243997',
-	None,
+	'No disponible',
 	'bn_popular',
 	'Tuluá',
 	"""Sede del Banco Poupular de la ciudad de Tuluá""",
@@ -233,7 +230,7 @@ empresas(
 	'Tuluá',
 	"""Sede de Bancolombia de la ciudad de Tuluá""",
 	'Carrera 26 No. 26 - 20',
-	None,
+	'No disponible',
 	'http://www.grupobancolombia.com/'
 )
 empresas(
@@ -258,7 +255,7 @@ empresas(
 	"""Cultivo de hortalizas, raíces y tubérculos""",
 	'Calle 26 No. 36-32 Apto 201',
 	'anyel176@hotmail.com',
-	None
+	'No disponible'
 )
 
 print (ge.serialize(format="pretty-xml"))
