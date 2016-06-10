@@ -17,7 +17,8 @@ def empresas(uri, nombre, tel, imagen, blank_node, ciudad, descripcion, direcc, 
 		ge.add( (URIRef(uri), FOAF.homepage, Literal('No disponible')) )
 	else:
 		ge.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)) )
-			
+	
+	ge.add( (URIRef(uri), FOAF.image, URIRef(image)) )		
 	ge.add( (URIRef(uri), RDF.type, GR.Location) )
 	ge.add( (URIRef(uri), GR.name, Literal(nombre)) )
 	ge.add( (URIRef(uri), GR.description, Literal(descripcion)))
@@ -107,8 +108,8 @@ empresas(
 	'http://i.imgur.com/68cCsff.jpg',
 	'bn_projugos',
 	'Tuluá',
-	"""Centro comercial del Corazon de Valle del Cauca donde encuentras plazoleta de comidas,
-	bares, tiendas, cine, eventos y mas""",
+	"""Projugos es una empresa especializada en el procesamiento de pulpas y jugos de frutas naturales
+	y concentrados.""",
 	'Calle 48 No. 21 - 100',
 	'info@projugos.com',
 	'http://www.projugos.com/'
@@ -134,7 +135,7 @@ empresas(
 	'http://i.imgur.com/Dqh8Z8Y.jpg',
 	'bn_centroaguas',
 	'Tuluá',
-	"""Purificación y distribucion de agua, para uso domestico y comercial""",
+	"""Purificación y distribución de agua, para uso domestico y comercial""",
 	'Carrera 26  No. 26 - 15',
 	'info@centroaguas.com',
 	'http://www.centroaguas.com/'

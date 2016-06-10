@@ -24,9 +24,12 @@ def alojamientos(uri, nombre, webpage, telefono, email, direcc, blank_node):
 	ga.add( (URIRef(uri), VCARD.email, Literal(email)))
 	ga.add( (URIRef(uri), VCARD.address, BNode(blank_node)))
 	ga.add( (URIRef(uri), VCARD['street-address'], Literal(direcc)))
+	ga.add( (URIRef(uri), ACCO.feature, ACCO.AccommodationFeature))
+	ga.add( (ACCO.AccommodationFeature, ACCO.availabilityTimes, Literal("24 Horas")) )
 	ga.add( (BNode(blank_node), RDF.type, VCARD.Address))
 	ga.add( (BNode(blank_node), VCARD['country-name'], Literal('Colombia')) )
 	ga.add( (BNode(blank_node), VCARD['locality'], Literal('Tuluá')) )
+
 
 alojamientos(
 	facebook["hotel.trivino"],
