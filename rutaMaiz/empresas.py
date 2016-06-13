@@ -29,7 +29,7 @@ def empresas(uri, nombre, tel, imagen, blank_node, ciudad, descripcion, direcc, 
 	ge.add( (BNode(blank_node), VCARD['locality'], Literal(ciudad)) )
 	ge.add( (URIRef(uri), VCARD['street-address'], Literal(direcc)))
 	ge.add( (URIRef(uri), VCARD.email, Literal(email)) ) 
-	
+	ge.add( (URIRef(uri), VCARD.cateogry, Literal("Empresas de la Ruta del Maíz")))
 
 empresas(
 	facebook['AGROCORVALLE'],

@@ -29,7 +29,7 @@ def alojamientos(uri, nombre, webpage, telefono, email, direcc, blank_node):
 	ga.add( (BNode(blank_node), RDF.type, VCARD.Address))
 	ga.add( (BNode(blank_node), VCARD['country-name'], Literal('Colombia')) )
 	ga.add( (BNode(blank_node), VCARD['locality'], Literal('Tuluá')) )
-
+	ga.add( (URIRef(uri), VCARD.cateogry, Literal("Alojamientos de la Ruta del Maíz")))
 
 alojamientos(
 	facebook["hotel.trivino"],
