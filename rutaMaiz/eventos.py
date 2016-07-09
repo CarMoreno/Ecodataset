@@ -3,19 +3,19 @@
 
 from rdflib import Namespace, URIRef, Literal, Graph, BNode
 from rdflib.namespace import RDF, RDFS, DC
-from ontologias import GR, VCARD, EVENT
-
-gv = Graph()
+from ontologias import GR, VCARD, EVENT, UMBEL
+from empresas import gRutaMaiz, rutaMaiz
 #Namespace necesarios
 rutaMaizEventos = Namespace('http://190.14.254.237/dataseteco/RutaDelMaiz/Eventos/')
 
 def eventos(uri, nombre, fecha, descripcion, lugar, media):
-	gv.add(( URIRef(uri), RDF.type, EVENT.Event ))
-	gv.add(( URIRef(uri), EVENT.atTime, Literal(fecha)))
-	gv.add(( URIRef(uri), EVENT.atPlace, Literal(lugar)))
-	gv.add(( URIRef(uri), EVENT.illustrate, URIRef(media)))
-	gv.add(( URIRef(uri), RDFS.label, Literal(nombre)))
-	gv.add( (URIRef(uri), DC.description, Literal(descripcion)))
+	gRutaMaiz.add(( URIRef(uri), RDF.type, EVENT.Event ) )
+	gRutaMaiz.add(( URIRef(uri), EVENT.atTime, Literal(fecha, datatype=XSD.date)) )
+	gRutaMaiz.add(( URIRef(uri), EVENT.atPlace, Literal(lugar)) )
+	gRutaMaiz.add(( URIRef(uri), EVENT.illustrate, URIRef(media)) )
+	gRutaMaiz.add(( URIRef(uri), RDFS.label, Literal(nombre)) )
+	gRutaMaiz.add(( URIRef(uri), RDFS.comment, Literal(descripcion)) )# se cambio DC por RDFS
+	gRutaMaiz.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Eventos)) )
 
 eventos(
 	'https://www.youtube.com/watch?v=gQn35OZVAM0',
@@ -143,4 +143,4 @@ eventos(
 	'Corregimiento Campoalegre',
 	'http://i.imgur.com/5shLwWm.jpg'
 )
-print (gv.serialize(format="pretty-xml"))	
+# print (gRutaMaiz.serialize(format="pretty-xml"))	
