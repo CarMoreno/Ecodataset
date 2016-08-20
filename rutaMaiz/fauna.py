@@ -4,7 +4,7 @@
 from rdflib import Namespace, URIRef, Literal, Graph, BNode
 from rdflib.namespace import RDF, RDFS, FOAF
 from ontologias import GR, VCARD, WILDLIFE, UMBEL
-from eventos import gRutaMaiz, rutaMaiz
+from eventos import g, rutaMaiz
 
 
 #Namespace necesarios
@@ -12,13 +12,13 @@ dbr = Namespace('http://dbpedia.org/resource/')
 wiki = Namespace('https://www.wikidata.org/wiki/')
 
 def fauna(uri, nombre_comun, nombre_cientifico, descripcion, imagen):
-	gRutaMaiz.add( (URIRef(uri), RDF.type, WILDLIFE.TaxonName) )
-	gRutaMaiz.add( (URIRef(uri), WILDLIFE.commonName, Literal(nombre_comun) ) )
-	gRutaMaiz.add( (URIRef(uri), WILDLIFE.scientificName, Literal(nombre_cientifico)) )
-	gRutaMaiz.add( (URIRef(uri), WILDLIFE.shortDescription, Literal(descripcion)) )
-	gRutaMaiz.add( (URIRef(uri), FOAF.depiction, URIRef(imagen)))
-	gRutaMaiz.add( (URIRef(uri), WILDLIFE.kingdomName, Literal('Animal')) )
-	gRutaMaiz.add( ( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Fauna)) )
+	g.add( (URIRef(uri), RDF.type, WILDLIFE.TaxonName) )
+	g.add( (URIRef(uri), WILDLIFE.commonName, Literal(nombre_comun) ) )
+	g.add( (URIRef(uri), WILDLIFE.scientificName, Literal(nombre_cientifico)) )
+	g.add( (URIRef(uri), WILDLIFE.shortDescription, Literal(descripcion)) )
+	g.add( (URIRef(uri), FOAF.depiction, URIRef(imagen)))
+	g.add( (URIRef(uri), WILDLIFE.kingdomName, Literal('Animal')) )
+	g.add( ( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Fauna)) )
 
 fauna(
 	dbr['Grey-headed_dove'],
@@ -389,5 +389,5 @@ fauna(
 	"http://i.imgur.com/qJ5aRSn.jpg"
 )
 
-#print (gRutaMaiz.serialize(format="pretty-xml")) 
+#print (g.serialize(format="pretty-xml")) 
 

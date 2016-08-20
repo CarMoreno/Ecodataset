@@ -4,7 +4,7 @@
 from rdflib import Namespace, URIRef, Literal, Graph, XSD
 from rdflib.namespace import RDF, FOAF
 from ontologias import GR, VCARD, UMBEL
-from lugares import gRutaMaiz, rutaMaiz
+from lugares import g, rutaMaiz
 
 facebook = Namespace('https://www.facebook.com/')
 twitter = Namespace('https://www.twitter.com/')
@@ -13,37 +13,37 @@ alcaldiaTulua = Namespace('http://www.tulua.gov.co/sitio.shtml?apc=m1r1--&x=')
 
 def restaurantes(uri, nombre, menu, telefono, direccion, webpage, imagen, mapa, uriatencion, abre, cierra):
     if webpage == "No disponible":
-        gRutaMaiz.add( (URIRef(uri), FOAF.homepage, Literal('No disponible')) )
+        g.add( (URIRef(uri), FOAF.homepage, Literal('No disponible')) )
     else:
-        gRutaMaiz.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)) )
+        g.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)) )
             
-    gRutaMaiz.add( (URIRef(uri), RDF.type, GR.Location) )
-    gRutaMaiz.add( (URIRef(uri), GR.name, Literal(nombre)) )
-    gRutaMaiz.add( (URIRef(uri), GR.description, Literal(menu)))
-    gRutaMaiz.add( (URIRef(uri), VCARD.tel, Literal(telefono)) )
-    gRutaMaiz.add( (URIRef(uri), FOAF.depiction, URIRef(imagen)) )
-    gRutaMaiz.add( (URIRef(uri), VCARD.adr, URIRef(mapa)))
-    gRutaMaiz.add( (URIRef(uri), GR.hasOpeningHoursSpecification, URIRef(uriatencion)) )
+    g.add( (URIRef(uri), RDF.type, GR.Location) )
+    g.add( (URIRef(uri), GR.name, Literal(nombre)) )
+    g.add( (URIRef(uri), GR.description, Literal(menu)))
+    g.add( (URIRef(uri), VCARD.tel, Literal(telefono)) )
+    g.add( (URIRef(uri), FOAF.depiction, URIRef(imagen)) )
+    g.add( (URIRef(uri), VCARD.adr, URIRef(mapa)))
+    g.add( (URIRef(uri), GR.hasOpeningHoursSpecification, URIRef(uriatencion)) )
      
     #Dirección según vCard 2006
-    gRutaMaiz.add( (URIRef(mapa), RDF.type, VCARD.Address) )
-    gRutaMaiz.add( (URIRef(mapa), VCARD['country-name'], Literal('Colombia')) )
-    gRutaMaiz.add( (URIRef(mapa), VCARD.locality, Literal('Tuluá')) )
-    gRutaMaiz.add( (URIRef(mapa), VCARD['street-address'], Literal(direccion)) )
+    g.add( (URIRef(mapa), RDF.type, VCARD.Address) )
+    g.add( (URIRef(mapa), VCARD['country-name'], Literal('Colombia')) )
+    g.add( (URIRef(mapa), VCARD.locality, Literal('Tuluá')) )
+    g.add( (URIRef(mapa), VCARD['street-address'], Literal(direccion)) )
 
     #Horario de atencion
-    gRutaMaiz.add( (URIRef(uriatencion), RDF.type, GR.OpeningHoursSpecification) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.opens, Literal(abre, datatype=XSD.time)) )#Se especifica el tipo de dato
-    gRutaMaiz.add( (URIRef(uriatencion), GR.closes, Literal(cierra, datatype=XSD.time)) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Monday) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Tuesday) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Wednesday) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Thursday) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Friday) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Saturday) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Sunday) )
+    g.add( (URIRef(uriatencion), RDF.type, GR.OpeningHoursSpecification) )
+    g.add( (URIRef(uriatencion), GR.opens, Literal(abre, datatype=XSD.time)) )#Se especifica el tipo de dato
+    g.add( (URIRef(uriatencion), GR.closes, Literal(cierra, datatype=XSD.time)) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Monday) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Tuesday) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Wednesday) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Thursday) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Friday) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Saturday) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Sunday) )
 
-    gRutaMaiz.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Restaurantes)))
+    g.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Restaurantes)))
 
 restaurantes(
     twitter['Ecodataset/status/715737460697931776'],
@@ -277,4 +277,4 @@ restaurantes(
     "21:00:00"
 )
 
-print (gRutaMaiz.serialize(format="pretty-xml"))   
+print (g.serialize(format="pretty-xml"))

@@ -4,7 +4,7 @@ from rdflib import Namespace
 from rdflib import URIRef, Literal, Graph
 from rdflib.namespace import RDF, RDFS, FOAF
 from ontologias import WILDLIFE, CRUZAR, UMBEL
-from fauna import gRutaMaiz, rutaMaiz
+from fauna import g, rutaMaiz
 
 dbpedia = Namespace('http://dbpedia.org/resource/')
 wikidata = Namespace('http://www.wikidata.org/entity/')
@@ -12,13 +12,13 @@ ruta = URIRef('http://190.14.254.237/dataseteco/Maiz/')
 floraRuta = URIRef('http://190.14.254.237/dataseteco/Maiz/Flora/')
 
 def flora(uri, nombre_comun, nombre_cientifico, descripcion, imagen):
-    gRutaMaiz.add( (URIRef(uri), RDF.type, WILDLIFE.TaxonName) )
-    gRutaMaiz.add( (URIRef(uri), WILDLIFE.commonName, Literal(nombre_comun) ) )
-    gRutaMaiz.add( (URIRef(uri), WILDLIFE.scientificName, Literal(nombre_cientifico)) )
-    gRutaMaiz.add( (URIRef(uri), WILDLIFE.shortDescription, Literal(descripcion)) )
-    gRutaMaiz.add( (URIRef(uri), FOAF.depiction, URIRef(imagen)))
-    gRutaMaiz.add( (URIRef(uri), WILDLIFE.kingdomName, Literal('Vegetal')) )
-    gRutaMaiz.add( (URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Flora)) )
+    g.add( (URIRef(uri), RDF.type, WILDLIFE.TaxonName) )
+    g.add( (URIRef(uri), WILDLIFE.commonName, Literal(nombre_comun) ) )
+    g.add( (URIRef(uri), WILDLIFE.scientificName, Literal(nombre_cientifico)) )
+    g.add( (URIRef(uri), WILDLIFE.shortDescription, Literal(descripcion)) )
+    g.add( (URIRef(uri), FOAF.depiction, URIRef(imagen)))
+    g.add( (URIRef(uri), WILDLIFE.kingdomName, Literal('Vegetal')) )
+    g.add( (URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Flora)) )
 
 flora(
     dbpedia['Citrus_nobilis'],
@@ -483,7 +483,7 @@ flora(
     "http://i.imgur.com/1pvbezV.jpg"
 )
 
-#print(gRutaMaiz.serialize(format='pretty-xml'))
+#print(g.serialize(format='pretty-xml'))
 
 
 

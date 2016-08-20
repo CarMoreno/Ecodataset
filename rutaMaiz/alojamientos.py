@@ -4,7 +4,7 @@
 from rdflib import Namespace, URIRef, Literal, Graph, XSD
 from rdflib.namespace import RDF, RDFS, FOAF
 from ontologias import GR, VCARD, ACCO, UMBEL
-from RutaMaiz import gRutaMaiz, rutaMaiz #de RutaMaiz importo el grafo de Inicio de la ruta
+from RutaMaiz import g, rutaMaiz #de RutaMaiz importo el grafo de Inicio de la ruta
 
 #Namespace necesarios
 facebook = Namespace('https://www.facebook.com/')
@@ -21,47 +21,47 @@ maps = Namespace('https://goo.gl/maps/')
 def alojamientos(uri, nombre, webpage, telefono, email, direcc, mapa, descripcion, uriRoom, uriValue, 
 	uriBed, numHabitaciones, numCamas, imagen):
 	if webpage == "No disponible":
-		gRutaMaiz.add( (URIRef(uri), FOAF.homepage, Literal(webpage)))
+		g.add( (URIRef(uri), FOAF.homepage, Literal(webpage)))
 	else:
-		gRutaMaiz.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)))	
+		g.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)))	
 			
-	gRutaMaiz.add( (URIRef(uri), RDF.type, ACCO.Hotel))
-	gRutaMaiz.add( (URIRef(uri), RDF.type, GR.Individual) )
-	gRutaMaiz.add( (URIRef(uri), GR.name, Literal(nombre)) )
-	gRutaMaiz.add( (URIRef(uri), GR.description, Literal(descripcion)) )
-	gRutaMaiz.add( (URIRef(uri), VCARD.tel, Literal(telefono)))
-	gRutaMaiz.add( (URIRef(uri), VCARD.email, Literal(email)))
-	gRutaMaiz.add( (URIRef(uri), FOAF.depiction, URIRef(imagen)))
-	gRutaMaiz.add( (URIRef(uri), VCARD.adr, URIRef(mapa)))
+	g.add( (URIRef(uri), RDF.type, ACCO.Hotel))
+	g.add( (URIRef(uri), RDF.type, GR.Individual) )
+	g.add( (URIRef(uri), GR.name, Literal(nombre)) )
+	g.add( (URIRef(uri), GR.description, Literal(descripcion)) )
+	g.add( (URIRef(uri), VCARD.tel, Literal(telefono)))
+	g.add( (URIRef(uri), VCARD.email, Literal(email)))
+	g.add( (URIRef(uri), FOAF.depiction, URIRef(imagen)))
+	g.add( (URIRef(uri), VCARD.adr, URIRef(mapa)))
 
 	#Dirección según vCard 2006
-	gRutaMaiz.add( (URIRef(mapa), RDF.type, VCARD.Address) )
-	gRutaMaiz.add( (URIRef(mapa), VCARD['country-name'], Literal('Colombia')) )
-	gRutaMaiz.add( (URIRef(mapa), VCARD.locality, Literal('Tuluá')) )
-	gRutaMaiz.add( (URIRef(mapa), VCARD['street-address'], Literal(direcc)) )
+	g.add( (URIRef(mapa), RDF.type, VCARD.Address) )
+	g.add( (URIRef(mapa), VCARD['country-name'], Literal('Colombia')) )
+	g.add( (URIRef(mapa), VCARD.locality, Literal('Tuluá')) )
+	g.add( (URIRef(mapa), VCARD['street-address'], Literal(direcc)) )
 
 	#Horario de Atención
-	gRutaMaiz.add( (URIRef(uri), ACCO.feature, ACCO.AccommodationFeature) )
-	gRutaMaiz.add( (ACCO.AccommodationFeature, ACCO.availabilityTimes, Literal("24 Horas")) )
+	g.add( (URIRef(uri), ACCO.feature, ACCO.AccommodationFeature) )
+	g.add( (ACCO.AccommodationFeature, ACCO.availabilityTimes, Literal("24 Horas")) )
 
 	#Habitaciones
-	gRutaMaiz.add( (URIRef(uriRoom), RDF.type, ACCO.HotelRoom))
-	gRutaMaiz.add( (URIRef(uriRoom), RDF.type, GR.SomeItems) )
-	gRutaMaiz.add( (URIRef(uriRoom), ACCO.partOf, URIRef(uri)) )
+	g.add( (URIRef(uriRoom), RDF.type, ACCO.HotelRoom))
+	g.add( (URIRef(uriRoom), RDF.type, GR.SomeItems) )
+	g.add( (URIRef(uriRoom), ACCO.partOf, URIRef(uri)) )
 
 	#Value
-	gRutaMaiz.add( (URIRef(uriValue), RDF.type, GR.QuantitativeValue))
-	gRutaMaiz.add( (URIRef(uriRoom), ACCO.numberOfRooms, URIRef(uriValue)) )
-	gRutaMaiz.add( (URIRef(uriValue), GR.hasUnitOfMeasurement, Literal("C62"))) #No hay unidades
-	gRutaMaiz.add( (URIRef(uriValue), GR.hasValue, Literal(numHabitaciones, datatype=XSD.int)))
+	g.add( (URIRef(uriValue), RDF.type, GR.QuantitativeValue))
+	g.add( (URIRef(uriRoom), ACCO.numberOfRooms, URIRef(uriValue)) )
+	g.add( (URIRef(uriValue), GR.hasUnitOfMeasurement, Literal("C62"))) #No hay unidades
+	g.add( (URIRef(uriValue), GR.hasValue, Literal(numHabitaciones, datatype=XSD.int)))
 
 	#Camas
-	gRutaMaiz.add( (URIRef(uriBed), RDF.type, ACCO.BedDetails))
-	gRutaMaiz.add( (URIRef(uriRoom), ACCO.bed, URIRef(uriBed)))
-	gRutaMaiz.add( (URIRef(uriBed), ACCO.quantity, Literal(numCamas, datatype=XSD.int)))
+	g.add( (URIRef(uriBed), RDF.type, ACCO.BedDetails))
+	g.add( (URIRef(uriRoom), ACCO.bed, URIRef(uriBed)))
+	g.add( (URIRef(uriBed), ACCO.quantity, Literal(numCamas, datatype=XSD.int)))
 
-	#gRutaMaiz.add( (URIRef(uri), VCARD.cateogry, Literal("Alojamientos de la Ruta del Maíz")))
-	gRutaMaiz.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Alojamientos)))
+	#g.add( (URIRef(uri), VCARD.cateogry, Literal("Alojamientos de la Ruta del Maíz")))
+	g.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Alojamientos)))
 
 alojamientos(
 	facebook["hotel.trivino"],
@@ -636,4 +636,4 @@ alojamientos(
 	"19",
 	imgur
 )
-#print(gRutaMaiz.serialize(format='pretty-xml'))
+#print(g.serialize(format='pretty-xml'))

@@ -4,34 +4,33 @@
 from rdflib import Namespace, URIRef, Literal, Graph
 from rdflib.namespace import RDF, FOAF, RDFS
 from ontologias import CRUZAR, VCARD, UMBEL
-from flora import gRutaMaiz, rutaMaiz
+from flora import g, rutaMaiz
 
 facebook = Namespace('https://www.facebook.com/')
 univalleLugares = Namespace('http://190.14.254.237/dataseteco/RutaDelMaiz/Lugares/')
 maps = Namespace('https://goo.gl/maps/')
-gRutaMaiz = Graph()
 
 def lugares(uri, nombre, descripcion, direccion, telefono, email, imagen, video, mapa): 
     if video == "No disponible":
-        gRutaMaiz.add( (URIRef(uri), FOAF.depiction, Literal('No disponible')) )
+        g.add( (URIRef(uri), FOAF.depiction, Literal('No disponible')) )
     else:
-        gRutaMaiz.add( (URIRef(uri), FOAF.depiction, URIRef(video)) )#puede ser usado para indicar contenido multimedia           
-    gRutaMaiz.add( (URIRef(uri), RDF.type, CRUZAR['Recurso-turistico']) )
-    gRutaMaiz.add( (URIRef(uri), RDF.type, VCARD.Location) )
-    gRutaMaiz.add( (URIRef(uri), FOAF.name, Literal(nombre)) )
-    gRutaMaiz.add( (URIRef(uri), RDFS.comment, Literal(descripcion)) )
-    gRutaMaiz.add( (URIRef(uri), VCARD.tel, Literal(telefono))  )
-    gRutaMaiz.add( (URIRef(uri), VCARD.email, Literal(email)) ) #agente
-    gRutaMaiz.add( (URIRef(uri), FOAF.depiction, URIRef(imagen)) ) #revisar
-    gRutaMaiz.add( (URIRef(uri), VCARD.adr, URIRef(mapa)))
+        g.add( (URIRef(uri), FOAF.depiction, URIRef(video)) )#puede ser usado para indicar contenido multimedia           
+    g.add( (URIRef(uri), RDF.type, CRUZAR['Recurso-turistico']) )
+    g.add( (URIRef(uri), RDF.type, VCARD.Location) )
+    g.add( (URIRef(uri), FOAF.name, Literal(nombre)) )
+    g.add( (URIRef(uri), RDFS.comment, Literal(descripcion)) )
+    g.add( (URIRef(uri), VCARD.tel, Literal(telefono))  )
+    g.add( (URIRef(uri), VCARD.email, Literal(email)) ) #agente
+    g.add( (URIRef(uri), FOAF.depiction, URIRef(imagen)) ) #revisar
+    g.add( (URIRef(uri), VCARD.adr, URIRef(mapa)))
 
     #Dirección según vCard 2006
-    gRutaMaiz.add( (URIRef(mapa), RDF.type, VCARD.Address) )
-    gRutaMaiz.add( (URIRef(mapa), VCARD['country-name'], Literal('Colombia')) )
-    gRutaMaiz.add( (URIRef(mapa), VCARD.locality, Literal('Tuluá')) )
-    gRutaMaiz.add( (URIRef(mapa), VCARD['street-address'], Literal(direccion)) )
+    g.add( (URIRef(mapa), RDF.type, VCARD.Address) )
+    g.add( (URIRef(mapa), VCARD['country-name'], Literal('Colombia')) )
+    g.add( (URIRef(mapa), VCARD.locality, Literal('Tuluá')) )
+    g.add( (URIRef(mapa), VCARD['street-address'], Literal(direccion)) )
     
-    gRutaMaiz.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Lugares))) 
+    g.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Lugares))) 
 
 lugares(
     'https://youtube/O2Up1EVnkLQ',#video parque de la guadua
@@ -134,6 +133,6 @@ lugares(
     maps['T33fhUWuf3x']
 )
 
-#print (gRutaMaiz.serialize(format="pretty-xml")) 
+#print (g.serialize(format="pretty-xml")) 
 
 

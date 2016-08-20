@@ -2,20 +2,21 @@
 # -*- coding: utf-8 -*-
 
 from rdflib import Namespace, URIRef, Literal, Graph, BNode
-from rdflib.namespace import RDF, RDFS, DC
+from rdflib.namespace import RDF, RDFS, DC, FOAF, XSD
 from ontologias import GR, VCARD, EVENT, UMBEL
-from empresas import gRutaMaiz, rutaMaiz
+from empresas import g, rutaMaiz
 #Namespace necesarios
 rutaMaizEventos = Namespace('http://190.14.254.237/dataseteco/RutaDelMaiz/Eventos/')
 
+
 def eventos(uri, nombre, fecha, descripcion, lugar, media):
-	gRutaMaiz.add(( URIRef(uri), RDF.type, EVENT.Event ) )
-	gRutaMaiz.add(( URIRef(uri), EVENT.atTime, Literal(fecha, datatype=XSD.date)) )
-	gRutaMaiz.add(( URIRef(uri), EVENT.atPlace, Literal(lugar)) )
-	gRutaMaiz.add(( URIRef(uri), EVENT.illustrate, URIRef(media)) )
-	gRutaMaiz.add(( URIRef(uri), RDFS.label, Literal(nombre)) )
-	gRutaMaiz.add(( URIRef(uri), RDFS.comment, Literal(descripcion)) )# se cambio DC por RDFS
-	gRutaMaiz.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Eventos)) )
+	g.add(( URIRef(uri), RDF.type, EVENT.Event ) )
+	g.add(( URIRef(uri), EVENT.atTime, Literal(fecha, datatype=XSD.date)) )
+	g.add(( URIRef(uri), EVENT.atPlace, Literal(lugar)) )
+	g.add(( URIRef(uri), FOAF.depiction, URIRef(media)) )
+	g.add(( URIRef(uri), RDFS.label, Literal(nombre)) )
+	g.add(( URIRef(uri), RDFS.comment, Literal(descripcion)) )# se cambio DC por RDFS
+	g.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Eventos)) )
 
 eventos(
 	'https://www.youtube.com/watch?v=gQn35OZVAM0',
@@ -143,4 +144,4 @@ eventos(
 	'Corregimiento Campoalegre',
 	'http://i.imgur.com/5shLwWm.jpg'
 )
-# print (gRutaMaiz.serialize(format="pretty-xml"))	
+print (g.serialize(format="pretty-xml"))	

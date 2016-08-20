@@ -4,7 +4,7 @@
 from rdflib import Namespace, URIRef, Literal, Graph, XSD
 from rdflib.namespace import RDF, RDFS, FOAF
 from ontologias import GR, VCARD, UMBEL
-from alojamientos import gRutaMaiz, rutaMaiz
+from alojamientos import g, rutaMaiz
 
 #Namespace necesarios
 facebook = Namespace('https://www.facebook.com/')
@@ -17,34 +17,34 @@ ciudadGuru = Namespace('http://www.ciudadguru.com.co/empresas/')
 # Esquema del grafo para empresas de la ruta del maíz.
 def empresas(uri, nombre, tel, imagen, descripcion, direcc, email, webpage, mapa, uriatencion, abre, cierra):
     if webpage == "No disponible":
-        gRutaMaiz.add( (URIRef(uri), FOAF.homepage, Literal('No disponible')) )
+        g.add( (URIRef(uri), FOAF.homepage, Literal('No disponible')) )
     else:
-        gRutaMaiz.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)) )
+        g.add( (URIRef(uri), FOAF.homepage, URIRef(webpage)) )
     
-    gRutaMaiz.add( (URIRef(uri), FOAF.image, URIRef(imagen)) )      
-    gRutaMaiz.add( (URIRef(uri), RDF.type, GR.Location) )
-    gRutaMaiz.add( (URIRef(uri), GR.name, Literal(nombre)) )
-    gRutaMaiz.add( (URIRef(uri), GR.description, Literal(descripcion)))
-    gRutaMaiz.add( (URIRef(uri), VCARD.tel, Literal(tel)) )
-    gRutaMaiz.add( (URIRef(uri), VCARD.email, Literal(email)) ) 
+    g.add( (URIRef(uri), FOAF.image, URIRef(imagen)) )      
+    g.add( (URIRef(uri), RDF.type, GR.Location) )
+    g.add( (URIRef(uri), GR.name, Literal(nombre)) )
+    g.add( (URIRef(uri), GR.description, Literal(descripcion)))
+    g.add( (URIRef(uri), VCARD.tel, Literal(tel)) )
+    g.add( (URIRef(uri), VCARD.email, Literal(email)) ) 
     
-    gRutaMaiz.add( (URIRef(uri), VCARD.adr, URIRef(mapa)) )
-    gRutaMaiz.add( (URIRef(mapa), RDF.type, VCARD.Address) )
-    gRutaMaiz.add( (URIRef(mapa), VCARD['country-name'], Literal('Colombia')) )
-    gRutaMaiz.add( (URIRef(mapa), VCARD.locality, Literal('Tuluá')) )
-    gRutaMaiz.add( (URIRef(mapa), VCARD['street-address'], Literal(direcc)) )
+    g.add( (URIRef(uri), VCARD.adr, URIRef(mapa)) )
+    g.add( (URIRef(mapa), RDF.type, VCARD.Address) )
+    g.add( (URIRef(mapa), VCARD['country-name'], Literal('Colombia')) )
+    g.add( (URIRef(mapa), VCARD.locality, Literal('Tuluá')) )
+    g.add( (URIRef(mapa), VCARD['street-address'], Literal(direcc)) )
 
-    gRutaMaiz.add( (URIRef(uri), GR.hasOpeningHoursSpecification, URIRef(uriatencion)))
-    gRutaMaiz.add( (URIRef(uriatencion), RDF.type, GR.OpeningHoursSpecification) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.opens, Literal(abre, datatype=XSD.time)) )#Se especifica el tipo de dato
-    gRutaMaiz.add( (URIRef(uriatencion), GR.closes, Literal(cierra, datatype=XSD.time)) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Monday) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Tuesday) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Wednesday) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Thursday) )
-    gRutaMaiz.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Friday) )
+    g.add( (URIRef(uri), GR.hasOpeningHoursSpecification, URIRef(uriatencion)))
+    g.add( (URIRef(uriatencion), RDF.type, GR.OpeningHoursSpecification) )
+    g.add( (URIRef(uriatencion), GR.opens, Literal(abre, datatype=XSD.time)) )#Se especifica el tipo de dato
+    g.add( (URIRef(uriatencion), GR.closes, Literal(cierra, datatype=XSD.time)) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Monday) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Tuesday) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Wednesday) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Thursday) )
+    g.add( (URIRef(uriatencion), GR.hasOpeningHoursDayOfWeek, GR.Friday) )
     
-    gRutaMaiz.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Empresas)))
+    g.add(( URIRef(uri), UMBEL.isRelatedTo, URIRef(rutaMaiz.Empresas)))
 
 empresas(
     facebook['AGROCORVALLE'],
@@ -324,4 +324,4 @@ empresas(
     "16:00:00" 
 )
 
-#print (gRutaMaiz.serialize(format="pretty-xml"))
+#print (g.serialize(format="pretty-xml"))
